@@ -34,7 +34,10 @@ export default function RModel(props: IRModelProps) {
             <div>
               <Typography variant="h4">{modelTitle}</Typography>
             </div>
-            <div className="flex items-center bg-black rounded-full p-2">
+            <div
+              className="flex items-center bg-black rounded-full p-2 cursor-pointer"
+              onClick={() => setOpen(false)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
