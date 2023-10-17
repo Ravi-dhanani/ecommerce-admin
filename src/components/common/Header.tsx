@@ -9,11 +9,12 @@ export default function Header(props: IHeaderProps) {
     <div>
       <nav className="bg-white border-b border-gray-300 dark:bg-gray-900 ">
         <div className=" flex  items-center justify-between  p-3">
-          <div className="flex gap-x-10">
+          <div className="flex md:gap-x-10 xs:gap-x-2">
             <IconButton
               variant="text"
               color="blue-gray"
               onClick={() => props.setOpen(!props.open)}
+              className="xl:hidden lg:hidden md:hidden sm:block "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

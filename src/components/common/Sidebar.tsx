@@ -7,17 +7,12 @@ import {
 } from "@material-tailwind/react";
 import { useRouter } from "next/router";
 import React from "react";
-interface ISidebarProps {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-export function Sidebar(props: ISidebarProps) {
+
+export function Sidebar() {
   const router = useRouter();
   return (
     <div
-      className={`top-[73px] left-0  w-64 border-r border-gray-300 h-[747px]   text-white fixed  z-0  ease-in-out duration-300 ${
-        props.open ? "translate-x-0 " : "-translate-x-full"
-      }`}
+      className={`top-[73px] left-0  w-64 border-r border-gray-300 h-[747px]   text-white fixed  z-0  ease-in-out duration-300  `}
     >
       <List>
         <ListItem>
