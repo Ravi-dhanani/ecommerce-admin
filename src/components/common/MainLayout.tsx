@@ -16,7 +16,7 @@ export default function MainLayout(props: { children: any }) {
               <div className="hidden md:block xl:block">
                 <Sidebar />
               </div>
-              <div className="">
+              <div>
                 <MobileView setOpen={setMobileView} open={isMobileView} />
               </div>
             </div>
