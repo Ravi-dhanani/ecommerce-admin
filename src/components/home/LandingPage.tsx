@@ -1,16 +1,8 @@
-import {
-  Button,
-  DialogFooter,
-  Input,
-  Option,
-  Select,
-  Typography,
-} from "@material-tailwind/react";
-import React from "react";
-import RModel from "../common/RModel";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Button, Input, Option, Select } from "@material-tailwind/react";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import RModel from "../common/model/RModel";
 
 interface ILandingForm {
   key: string;

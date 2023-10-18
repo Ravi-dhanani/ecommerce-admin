@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import React, { useState } from "react";
+import RButtonModel from "./RButtonModel";
 interface IRModelProps {
   children: any;
   title: string;
@@ -68,6 +69,7 @@ export default function RModel(props: IRModelProps) {
           </div>
         </DialogHeader>
         <DialogBody>{children}</DialogBody>
+        <RButtonModel />
       </Dialog>
     </div>
   );

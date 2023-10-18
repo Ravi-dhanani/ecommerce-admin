@@ -1,16 +1,10 @@
-import {
-  Button,
-  DialogFooter,
-  Input,
-  Option,
-  Select,
-  Typography,
-} from "@material-tailwind/react";
-import React from "react";
-import RModel from "../common/RModel";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Button, Input } from "@material-tailwind/react";
+import React from "react";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import RModel from "../common/model/RModel";
+import RButtonModel from "../common/model/RButtonModel";
 
 interface ICarouselForm {
   Title: string;
@@ -91,7 +85,7 @@ export default function Carousel() {
                   : "border-blue-500"
               }  rounded-md p-10 text-center`}
             >
-              <div className="  text-sm leading-6 text-gray-600 flex justify-center">
+              <div className=" text-sm leading-6 text-gray-600 flex justify-center">
                 <label className="relative cursor-pointer rounded-md bg-white font-semibold text-black focus-within:outline-none focus-within:ring-2 ">
                   <span>Upload a file</span>
                   <input
@@ -115,13 +109,12 @@ export default function Carousel() {
               </span>
             </div>
           </div>
-          <div className="flex justify-end">
-            <Button variant="text" color="red" className="mr-1">
-              <span>Cancel</span>
-            </Button>
-            <Button type="submit" variant="gradient" color="green">
-              <span>Save</span>
-            </Button>
+          <div className="">
+            <RButtonModel>
+              <Button type="submit" variant="gradient" color="green">
+                <span>Save</span>
+              </Button>
+            </RButtonModel>
           </div>
         </form>
       </RModel>
