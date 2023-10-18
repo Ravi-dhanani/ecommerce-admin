@@ -89,9 +89,9 @@ export default function Carousel() {
                 objForm.formState.errors.ImageUrl
                   ? "border-red-500"
                   : "border-blue-500"
-              }  rounded-md p-3 text-center`}
+              }  rounded-md p-10 text-center`}
             >
-              <div className="mt-4  text-sm leading-6 text-gray-600 flex justify-center">
+              <div className="  text-sm leading-6 text-gray-600 flex justify-center">
                 <label className="relative cursor-pointer rounded-md bg-white font-semibold text-black focus-within:outline-none focus-within:ring-2 ">
                   <span>Upload a file</span>
                   <input
