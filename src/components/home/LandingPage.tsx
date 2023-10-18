@@ -2,6 +2,8 @@ import {
   Button,
   DialogFooter,
   Input,
+  Option,
+  Select,
   Typography,
 } from "@material-tailwind/react";
 import React from "react";
@@ -10,15 +12,22 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+interface ILandingForm {
+  key: string;
+  title: string;
+  homeItem: string;
+}
+
 const schema = yup
   .object({
-    firstName: yup.string().required(),
-    age: yup.number().positive().integer().required(),
+    key: yup.string().required(),
+    title: yup.string().required(),
+    homeItem: yup.string().required(),
   })
   .required();
 
 export default function LandingPage() {
-  const objForm = useForm({
+  const objForm = useForm<ILandingForm>({
     resolver: yupResolver(schema),
   });
   const onSubmit = (data: any) => console.log(data);
@@ -28,21 +37,55 @@ export default function LandingPage() {
         buttonTitle="Landing Page"
         modelTitle="Landing Page"
         title="Home Page"
+        modelSize="xl"
       >
         <form onSubmit={objForm.handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-2 gap-5 mb-10">
+          <div className="  sm:grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 sm:gap-4 md:gap-5 mb-10">
             <div>
               <Input
                 color="blue"
-                label="Name"
-                {...objForm.register("firstName")}
-                error={
-                  objForm.formState.errors.firstName?.message ? true : false
-                }
+                label="Key"
+                {...objForm.register("key")}
+                error={objForm.formState.errors.key?.message ? true : false}
               />
+              <span className="mt-[4px] flex items-center gap-1 font-normal text-red-500">
+                {objForm.formState.errors?.key?.message}
+              </span>
             </div>
             <div>
-              <Input color="blue" label="Name" {...objForm.register("age")} />
+              <Input
+                color="blue"
+                label="Title"
+                {...objForm.register("title")}
+                error={objForm.formState.errors.title?.message ? true : false}
+              />
+              <span
+                color="red"
+                className="mt-[4px] flex items-center gap-1 font-normal text-red-500"
+              >
+                {objForm.formState.errors.title?.message}
+              </span>
+            </div>
+            <div>
+              <Select
+                color="blue"
+                label="Item"
+                error={
+                  objForm.formState.errors.homeItem?.message ? true : false
+                }
+              >
+                <Option>Material Tailwind HTML</Option>
+                <Option>Material Tailwind React</Option>
+                <Option>Material Tailwind Vue</Option>
+                <Option>Material Tailwind Angular</Option>
+                <Option>Material Tailwind Svelte</Option>
+              </Select>
+              <span
+                color="red"
+                className="mt-[4px] flex items-center gap-1 font-normal text-red-500"
+              >
+                {objForm.formState.errors.homeItem?.message}
+              </span>
             </div>
           </div>
           <div className="flex justify-end">

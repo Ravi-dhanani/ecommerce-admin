@@ -6,16 +6,19 @@ import {
   DialogHeader,
   Typography,
 } from "@material-tailwind/react";
-import { useState } from "react";
+import React, { useState } from "react";
 interface IRModelProps {
   children: any;
   title: string;
   modelTitle: string;
   buttonTitle: string;
+  modelSize: any | undefined;
 }
 export default function RModel(props: IRModelProps) {
-  const { children, title, modelTitle, buttonTitle } = props;
-  const [Open, setOpen] = useState(false);
+  const { children, title, modelTitle, buttonTitle, modelSize } = props;
+  const [open, setOpen] = React.useState(null);
+  const handleOpen = (value: any) => setOpen(value);
+
   return (
     <div>
       <div className="flex justify-between">
@@ -23,20 +26,31 @@ export default function RModel(props: IRModelProps) {
           <Typography variant="h3">{title}</Typography>
         </div>
         <div>
-          <Button variant="outlined" onClick={() => setOpen(true)}>
+          <Button variant="outlined" onClick={() => setOpen(modelSize)}>
             {buttonTitle}
           </Button>
         </div>
       </div>
-      <Dialog open={Open} size={"lg"} handler={setOpen}>
+      <Dialog
+        open={
+          open === "xs" ||
+          open === "sm" ||
+          open === "md" ||
+          open === "lg" ||
+          open === "xl" ||
+          open === "xxl"
+        }
+        size={open || "md"}
+        handler={handleOpen}
+      >
         <DialogHeader className="w-full p-3 border-b border-gray-300">
           <div className="w-full flex justify-between items-center">
             <div>
               <Typography variant="h4">{modelTitle}</Typography>
             </div>
             <div
-              className="flex items-center bg-black rounded-full p-2 cursor-pointer"
-              onClick={() => setOpen(false)}
+              className="flex items-center bg-black rounded-full p-2 cursor-pointer "
+              onClick={() => setOpen(null)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -8,6 +8,7 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 import LandingPage from "../home/LandingPage";
+import Carousel from "../carousel/Carousel";
 
 export default function SideNav() {
   const router = useRouter();
@@ -15,14 +16,13 @@ export default function SideNav() {
   return (
     <div>
       <List>
-        <ListItem>
+        <ListItem onClick={() => router.push("/")}>
           <ListItemPrefix>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
               className="h-5 w-5"
-              onClick={() => router.push("/")}
             >
               <path
                 fillRule="evenodd"
@@ -33,14 +33,13 @@ export default function SideNav() {
           </ListItemPrefix>
           Dashboard
         </ListItem>
-        <ListItem>
+        <ListItem onClick={() => router.push("/landingPage")}>
           <ListItemPrefix>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
               className="h-5 w-5"
-              onClick={() => router.push("/landingPage")}
             >
               <path
                 fillRule="evenodd"
@@ -51,7 +50,7 @@ export default function SideNav() {
           </ListItemPrefix>
           LandingPage
         </ListItem>
-        <ListItem>
+        <ListItem onClick={() => router.push("/carousel")}>
           <ListItemPrefix>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +65,7 @@ export default function SideNav() {
               />
             </svg>
           </ListItemPrefix>
-          Inbox
+          Carousel
           <ListItemSuffix>
             <Chip
               value="14"
