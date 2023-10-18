@@ -2,12 +2,10 @@ import {
   Button,
   Dialog,
   DialogBody,
-  DialogFooter,
   DialogHeader,
   Typography,
 } from "@material-tailwind/react";
-import React, { useState } from "react";
-import RButtonModel from "./RButtonModel";
+import { setIsModel, store } from "../pulState/store";
 interface IRModelProps {
   children: any;
   title: string;
@@ -17,8 +15,8 @@ interface IRModelProps {
 }
 export default function RModel(props: IRModelProps) {
   const { children, title, modelTitle, buttonTitle, modelSize } = props;
-  const [open, setOpen] = React.useState(null);
-  const handleOpen = (value: any) => setOpen(value);
+  const isModelOpen = store.useState((s) => s.isModelOpen);
+  const handleOpen = (value: any) => setIsModel(value);
 
   return (
     <div>
@@ -27,36 +25,38 @@ export default function RModel(props: IRModelProps) {
           <Typography variant="h3">{title}</Typography>
         </div>
         <div>
-          <Button variant="outlined" onClick={() => setOpen(modelSize)}>
+          <Button variant="outlined" onClick={() => setIsModel(modelSize)}>
             {buttonTitle}
           </Button>
         </div>
       </div>
       <Dialog
         open={
-          open === "xs" ||
-          open === "sm" ||
-          open === "md" ||
-          open === "lg" ||
-          open === "xl" ||
-          open === "xxl"
+          isModelOpen === "xs" ||
+          isModelOpen === "sm" ||
+          isModelOpen === "md" ||
+          isModelOpen === "lg" ||
+          isModelOpen === "xl" ||
+          isModelOpen === "xxl"
         }
-        size={open || "md"}
+        size={isModelOpen || "md"}
         handler={handleOpen}
       >
-        <DialogHeader className="w-full p-3 border-b border-gray-300">
+        <DialogHeader className="w-full p-3 border-b border-gray-300 bg-[#16a34a] rounded-t-md mb-3">
           <div className="w-full flex justify-between items-center">
             <div>
-              <Typography variant="h4">{modelTitle}</Typography>
+              <Typography variant="h4" className="text-white">
+                {modelTitle}
+              </Typography>
             </div>
             <div
-              className="flex items-center bg-black rounded-full p-2 cursor-pointer "
-              onClick={() => setOpen(null)}
+              className="flex items-center bg-white rounded-full p-2 cursor-pointer "
+              onClick={() => setIsModel(null)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
-                fill="white"
+                fill="black"
                 className="w-6 h-6"
               >
                 <path
@@ -69,7 +69,6 @@ export default function RModel(props: IRModelProps) {
           </div>
         </DialogHeader>
         <DialogBody>{children}</DialogBody>
-        <RButtonModel />
       </Dialog>
     </div>
   );

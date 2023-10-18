@@ -2,9 +2,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Input } from "@material-tailwind/react";
 import React from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import * as yup from "yup";
 import RModel from "../common/model/RModel";
-import RButtonModel from "../common/model/RButtonModel";
+import { setIsModel } from "../common/pulState/store";
+import ApiServices from "../services/Apiservices";
+import ListCarousel from "./ListCarousel";
 
 interface ICarouselForm {
   Title: string;
@@ -48,9 +51,27 @@ export default function Carousel() {
     objForm.setValue("ImageUrl", JSON.stringify(base64));
   };
 
-  const onSubmit = (data: ICarouselForm) => {
-    const carouselData = { ...data, ImageUrl: postImage.myFile };
-    console.log(carouselData);
+  const onSubmit = async (data: ICarouselForm) => {
+    try {
+      const carouselData = { ...data, ImageUrl: postImage.myFile };
+      const res = await ApiServices.addCarousel(carouselData);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: `${res.message}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setIsModel(null);
+      objForm.reset();
+    } catch (err: any) {
+      setIsModel(null);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${err.message}`,
+      });
+    }
   };
 
   return (
@@ -109,15 +130,22 @@ export default function Carousel() {
               </span>
             </div>
           </div>
-          <div className="">
-            <RButtonModel>
-              <Button type="submit" variant="gradient" color="green">
-                <span>Save</span>
-              </Button>
-            </RButtonModel>
+          <div className="flex justify-end gap-x-5">
+            <Button
+              variant="gradient"
+              color="red"
+              onClick={() => setIsModel(null)}
+              className="mr-1"
+            >
+              <span>Cancel</span>
+            </Button>
+            <Button type="submit" variant="gradient" color="green">
+              <span>Save</span>
+            </Button>
           </div>
         </form>
       </RModel>
+      <ListCarousel />
     </div>
   );
 }
